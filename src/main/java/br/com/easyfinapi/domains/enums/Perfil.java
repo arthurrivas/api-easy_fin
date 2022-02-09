@@ -1,15 +1,14 @@
 package br.com.easyfinapi.domains.enums;
 
 public enum Perfil {
-	
-	ADMIN(1,"ROLE_ADMIM"),
-	PROFESSOR(2,"ROLE_PROFESSOR"),
-	ALUNO(3,"ROLE_ALUNO");
-	
-	
+
+	ROLE_ADMIN(1, "ROLE_ADMIM"), 
+	ROLE_PROFESSOR(2, "ROLE_PROFESSOR"), 
+	ROLE_ALUNO(3, "ROLE_ALUNO");
+
 	private Integer codPerfil;
 	private String descricaoPerfil;
-	
+
 	Perfil(Integer i, String descricao) {
 		this.codPerfil = i;
 		this.descricaoPerfil = descricao;
@@ -31,7 +30,19 @@ public enum Perfil {
 		this.descricaoPerfil = descricaoPerfil;
 	}
 	
-	
-	
-	
+
+	public static Perfil toEnum(Integer cod) {
+		
+		if (cod == null) {
+			return null;
+		}
+		
+		for (Perfil x : Perfil.values()) {
+			if (cod.equals(x.getCodPerfil())) {
+				return x;
+			}
+		}
+		return null;
+	}
+
 }

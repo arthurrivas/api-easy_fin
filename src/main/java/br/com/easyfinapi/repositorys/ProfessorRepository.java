@@ -7,4 +7,7 @@ import br.com.easyfinapi.domains.Professor;
 
 @Repository
 public interface ProfessorRepository extends MongoRepository<Professor, String> {
+	
+	
+	public Professor findByEmail(String email);
 }

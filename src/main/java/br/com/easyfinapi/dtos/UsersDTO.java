@@ -16,7 +16,6 @@ public class UsersDTO {
 	public UsersDTO(Users user) {
 		super();
 		this.id = user.getId();
-		this.nome = user.getNome();
 		this.email = user.getEmail();
 	}
 

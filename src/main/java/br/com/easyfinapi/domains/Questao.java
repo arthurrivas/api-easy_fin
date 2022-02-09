@@ -1,5 +1,7 @@
 package br.com.easyfinapi.domains;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,12 +12,14 @@ public class Questao {
 	private String id;
 	private String descricaoQuestao;
 	
+	private String alternativaCerta;
+	private List<String> alternativasErrada;
+	
+	
 	public Questao() {
-		super();
 	}
 
 	public Questao(String descricaoQuestao) {
-		super();
 		this.descricaoQuestao = descricaoQuestao;
 	}
 
@@ -34,6 +38,23 @@ public class Questao {
 	public void setDescricaoQuestao(String descricaoQuestao) {
 		this.descricaoQuestao = descricaoQuestao;
 	}
+
+	public String getAlternativaCerta() {
+		return alternativaCerta;
+	}
+
+	public void setAlternativaCerta(String alternativaCerta) {
+		this.alternativaCerta = alternativaCerta;
+	}
+
+	public List<String> getAlternativasErrada() {
+		return alternativasErrada;
+	}
+
+	public void setAlternativasErrada(List<String> alternativasErrada) {
+		this.alternativasErrada = alternativasErrada;
+	}
+	
 	
 	
 	
