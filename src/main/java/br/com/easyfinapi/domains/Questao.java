@@ -19,9 +19,15 @@ public class Questao {
 	public Questao() {
 	}
 
-	public Questao(String descricaoQuestao) {
+	
+
+	public Questao(String id, String descricaoQuestao, String alternativaCerta) {
+		this.id = id;
 		this.descricaoQuestao = descricaoQuestao;
+		this.alternativaCerta = alternativaCerta;
 	}
+
+
 
 	public String getId() {
 		return id;

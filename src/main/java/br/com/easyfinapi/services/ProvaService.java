@@ -21,9 +21,13 @@ public class ProvaService {
 		provaRepository.saveAll(Arrays.asList(prova));
 	}
 	
+	public Prova findById(String id) {
+		return provaRepository.findById(id).get();
+	}
 	
-	public Prova fromDTO(ProvaDTO provaDTO){
-		return new Prova(null,provaDTO.getTitulo(),null);
+	
+	public Prova fromDTO(ProvaDTO provaDTO , String idProfessor){
+		return new Prova(null,provaDTO.getTitulo(),null, idProfessor);
 	}
 	
 }

@@ -13,6 +13,8 @@ public class Prova {
 	private String id;
 	private String titulo;
 	
+	private String idProfessorCriador;
+	
 	
 	private List<Questao> listaQuestoes = new ArrayList<>();
 	
@@ -21,10 +23,11 @@ public class Prova {
 	}
 
 	
-	public Prova(String id, String titulo, List<Questao> listaQuestoes) {
+	public Prova(String id, String titulo, List<Questao> listaQuestoes, String idProfessor) {
 		this.id = id;
 		this.titulo = titulo;
 		this.listaQuestoes = listaQuestoes;
+		this.idProfessorCriador = idProfessor;
 	}
 
 
@@ -47,6 +50,17 @@ public class Prova {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
+	
+	public String getIdProfessorCriador() {
+		return idProfessorCriador;
+	}
+
+
+	public void setIdProfessorCriador(String idProfessorCriador) {
+		this.idProfessorCriador = idProfessorCriador;
+	}
+
 
 	public List<Questao> getListaQuestoes() {
 		return listaQuestoes;
