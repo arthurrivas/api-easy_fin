@@ -16,7 +16,7 @@ public class QuestaoService {
 	
 	public Questao fromDTO(QuestaoDTO questaoDTO) {
 		
-		return new Questao(null,questaoDTO.getDescricaoQuestao(), questaoDTO.getAlternativaCerta() );
+		return new Questao(null,questaoDTO.getDescricaoQuestao());
 	}
 	
 	

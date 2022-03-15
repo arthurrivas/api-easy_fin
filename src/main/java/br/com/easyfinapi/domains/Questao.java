@@ -1,5 +1,6 @@
 package br.com.easyfinapi.domains;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -12,8 +13,8 @@ public class Questao {
 	private String id;
 	private String descricaoQuestao;
 	
-	private String alternativaCerta;
-	private List<String> alternativasErrada;
+	
+	private List<Alternativa> alternativas = new ArrayList<>();
 	
 	
 	public Questao() {
@@ -21,10 +22,9 @@ public class Questao {
 
 	
 
-	public Questao(String id, String descricaoQuestao, String alternativaCerta) {
+	public Questao(String id, String descricaoQuestao) {
 		this.id = id;
 		this.descricaoQuestao = descricaoQuestao;
-		this.alternativaCerta = alternativaCerta;
 	}
 
 
@@ -45,20 +45,12 @@ public class Questao {
 		this.descricaoQuestao = descricaoQuestao;
 	}
 
-	public String getAlternativaCerta() {
-		return alternativaCerta;
+	public void setAlternativasErrada(List<Alternativa> alternativas) {
+		this.alternativas = alternativas;
 	}
-
-	public void setAlternativaCerta(String alternativaCerta) {
-		this.alternativaCerta = alternativaCerta;
-	}
-
-	public List<String> getAlternativasErrada() {
-		return alternativasErrada;
-	}
-
-	public void setAlternativasErrada(List<String> alternativasErrada) {
-		this.alternativasErrada = alternativasErrada;
+	
+	public void addAlternativa(Alternativa alternativa) {
+		this.alternativas.add(alternativa);
 	}
 	
 	

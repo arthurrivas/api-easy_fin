@@ -74,7 +74,7 @@ public class ProfessorController {
 
 		UsuarioSS ss = userService.isAuthenticated();
 
-		if (ss.getId() != null) {
+		if (ss.getId() != null ) {
 			Professor prof = professorService.findById(ss.getId());
 
 			prof.setEmail(profDTO.getEmail());
@@ -105,10 +105,9 @@ public class ProfessorController {
 	@GetMapping("/{id}/provas")
 	public ResponseEntity<?> listaProvasByIdProfessor(@PathVariable(value = "id")String id ){
 		try {
+	
 			Professor prof = professorService.findById(id);
-			
-			
-			
+	
 			return new ResponseEntity<>(HttpStatus.OK).ok(prof.getProvas());
 		
 		} catch (Exception e) {

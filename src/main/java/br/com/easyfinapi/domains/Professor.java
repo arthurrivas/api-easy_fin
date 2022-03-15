@@ -13,6 +13,10 @@ import br.com.easyfinapi.domains.enums.Perfil;
 @Document
 public class Professor extends Users {
 	private static final long serialVersionUID = 1L;
+	
+	@JsonIgnore
+	@DBRef
+	private List<Turma> turmas = new ArrayList<>();
 
 	@JsonIgnore
 	@DBRef
@@ -28,7 +32,7 @@ public class Professor extends Users {
 		
 	}
 
-	public void adicionaProva(Prova idReferencia) {
+	public void addProva(Prova idReferencia) {
 		this.provas.add(idReferencia);
 	}
 
@@ -40,6 +44,19 @@ public class Professor extends Users {
 
 	public void setProvas(List<Prova> idQuestoes) {
 		this.provas = idQuestoes;
+	}
+	
+	public void addTurma(Turma turma) {
+		this.turmas.add(turma);
+	}
+	
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
 	}
 
 	@Override

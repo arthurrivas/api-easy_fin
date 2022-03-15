@@ -1,6 +1,7 @@
 package br.com.easyfinapi.domains;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -12,6 +13,9 @@ public class Prova {
 	@Id
 	private String id;
 	private String titulo;
+	
+	private Date dataInicio;
+	private Date dataLimite;
 	
 	private String idProfessorCriador;
 	

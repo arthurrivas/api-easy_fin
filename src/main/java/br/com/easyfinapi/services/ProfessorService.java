@@ -24,6 +24,11 @@ public class ProfessorService {
 		professorRepository.saveAll(Arrays.asList(prof));
 	}
 	
+	public void save(Professor prof) {
+		professorRepository.save(prof);
+	}
+	
+	
 	public void atualizaProfessor(String id, ProfessorDTO professorDTO) {
 		Professor professor = findById(id);
 		
@@ -54,5 +59,7 @@ public class ProfessorService {
 	public Professor fromProfessorDTO(ProfessorDTO professorDTO) {
 		return new Professor(null,professorDTO.getNome(),professorDTO.getEmail(),pe.encode(professorDTO.getSenha()));
 	}
+
+	
 	
 }	

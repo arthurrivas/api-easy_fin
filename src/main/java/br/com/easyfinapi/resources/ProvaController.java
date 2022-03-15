@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,7 +74,7 @@ public class ProvaController {
 
 			provaService.saveAll(prova);
 
-			prof.adicionaProva(prova);
+			prof.addProva(prova);
 
 			professorService.saveAll(Arrays.asList(prof));
 		}
@@ -130,4 +131,22 @@ public class ProvaController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@DeleteMapping(value = "/{idProva}/questao/{idQuestao}")
+	public ResponseEntity<?> deletaQuestao(@PathVariable(value = "id")String idProva, 
+											@PathVariable(value = "idQuestao")String idQuestao ){
+		
+		Prova prova = provaService.findById(idProva);
+		//precisa ser implementado a função de deletar a questão usando o id dela		
+		
+		
+		return new ResponseEntity(HttpStatus.NO_CONTENT).noContent().build();
+	}
 }
+
+
+
+
+
+
+
+
