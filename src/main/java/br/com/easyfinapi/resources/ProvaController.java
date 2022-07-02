@@ -138,7 +138,6 @@ public class ProvaController {
 		Prova prova = provaService.findById(idProva);
 		//precisa ser implementado a função de deletar a questão usando o id dela		
 		
-		
 		return new ResponseEntity(HttpStatus.NO_CONTENT).noContent().build();
 	}
 }

@@ -16,6 +16,10 @@ public class Turma {
 	@Id
 	protected String id;
 
+	protected String nome;
+	protected String materia;
+	
+	@DBRef
 	protected Professor professor;
 	
 	@JsonIgnore

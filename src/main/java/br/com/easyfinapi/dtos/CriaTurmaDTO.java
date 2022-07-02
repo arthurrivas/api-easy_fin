@@ -3,14 +3,17 @@ package br.com.easyfinapi.dtos;
 public class CriaTurmaDTO {
 	
 	private String nome;
-	private String idProfessor;
+	private String materia;
+	private String emailProf;
 	
 	public CriaTurmaDTO() {
 	}
 	
-	public CriaTurmaDTO(String nome, String idProfessor) {
+	public CriaTurmaDTO(String nome,String materia, String emailProf) {
 		this.nome = nome;
-		this.idProfessor = idProfessor;
+		this.materia = materia;
+		this.emailProf = emailProf;
+		
 	}
 
 	public String getNome() {
@@ -21,16 +24,20 @@ public class CriaTurmaDTO {
 		this.nome = nome;
 	}
 
-	public String getIdProfessor() {
-		return idProfessor;
+	public String getMateria() {
+		return materia;
 	}
 
-	public void setIdProfessor(String idProfessor) {
-		this.idProfessor = idProfessor;
+	public void setMateria(String materia) {
+		this.materia = materia;
 	}
-	
-	
-	
-	
+
+	public String getEmailProf() {
+		return emailProf;
+	}
+
+	public void setEmailProf(String emailProf) {
+		this.emailProf = emailProf;
+	}
 	
 }

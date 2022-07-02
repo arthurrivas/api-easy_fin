@@ -14,8 +14,8 @@ public class Prova {
 	private String id;
 	private String titulo;
 	
-	private Date dataInicio;
-	private Date dataLimite;
+//	private Date dataInicio;
+//	private Date dataLimite;
 	
 	private String idProfessorCriador;
 	

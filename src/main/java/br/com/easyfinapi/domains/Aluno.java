@@ -7,8 +7,7 @@ import br.com.easyfinapi.domains.enums.Perfil;
 @Document
 public class Aluno extends Users {
 	
-	
-	
+
 	public Aluno(){
 	}
 	

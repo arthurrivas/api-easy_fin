@@ -50,7 +50,7 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 			.antMatchers(HttpMethod.GET, PUBLIC_GET_MATCHERS).permitAll()
 			.antMatchers(HttpMethod.POST, PUBLIC_POST_MATCHERS).permitAll()
-			.antMatchers(ADMIN_MATCHERS).hasRole("ADMIN")
+			.antMatchers(ADMIN_MATCHERS).hasRole("PROFESSOR")
 			.anyRequest().authenticated();
 		http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userDetailService));

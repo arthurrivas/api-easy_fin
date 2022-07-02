@@ -46,18 +46,23 @@ public class TurmaController {
 	@PostMapping
 	public ResponseEntity<?> addTurma(@RequestBody CriaTurmaDTO novaTurmaDTO){
 		
-		
-		Professor prof = professorService.findById(novaTurmaDTO.getIdProfessor());
-		Turma turma = new Turma(null, prof , new Date());
-		
-		turmaService.saveTurma(turma);
-		
-		prof.addTurma(turma);
-		
-		professorService.save(prof);
+		try {
+			Professor prof = professorService.findByEmail(novaTurmaDTO.getEmailProf());
+			Turma turma = new Turma(null, prof , new Date());
+			
+			turmaService.saveTurma(turma);
+			
+			prof.addTurma(turma);
+			
+			professorService.save(prof);
 
-		return new ResponseEntity<>(HttpStatus.CREATED).ok(turma);
-		
+			return new ResponseEntity<>(HttpStatus.CREATED).ok(turma);
+			
+		} catch (Exception e) {
+			
+			//# Adicionar tratamento de erro
+			return null;
+		}
 		
 	}
 	

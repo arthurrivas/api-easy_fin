@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easyfinapi.domains.Professor;
@@ -47,26 +46,12 @@ public class ProfessorController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> retornaProfessores(@RequestParam(value = "email", required = false) String email) {
-		
-		if (email.equals(null)) {
-			List<Professor> listaProfessores = professorService.findAll();
+	public ResponseEntity<?> retornaProfessores() {
 
-			return new ResponseEntity<>(HttpStatus.OK).ok(listaProfessores);
+		List<Professor> listaProfessores = professorService.findAll();
 
-		}
-		
-		
-		Professor prof;
-		try {
-			prof = professorService.findByEmail(email);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.noContent().build();
-		}
-		
-		return new ResponseEntity<>(HttpStatus.OK).ok(prof);
-		
+		return new ResponseEntity<>(HttpStatus.OK).ok(listaProfessores);
+
 	}
 
 	@PutMapping
@@ -74,7 +59,7 @@ public class ProfessorController {
 
 		UsuarioSS ss = userService.isAuthenticated();
 
-		if (ss.getId() != null ) {
+		if (ss.getId() != null) {
 			Professor prof = professorService.findById(ss.getId());
 
 			prof.setEmail(profDTO.getEmail());
@@ -88,39 +73,31 @@ public class ProfessorController {
 
 		return null;
 	}
-	
-	
-	// Apenas Admin 
+
+	// Apenas Admin
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> listaProfById(@PathVariable(value = "id")String id ){
+	public ResponseEntity<?> listaProfById(@PathVariable(value = "id") String id) {
 		try {
 			Professor prof = professorService.findById(id);
 			return new ResponseEntity<>(HttpStatus.OK).ok(prof);
-		
+
 		} catch (Exception e) {
 			return ResponseEntity.noContent().build();
 		}
 	}
-	
+
 	@GetMapping("/{id}/provas")
-	public ResponseEntity<?> listaProvasByIdProfessor(@PathVariable(value = "id")String id ){
+	public ResponseEntity<?> listaProvasByIdProfessor(@PathVariable(value = "id") String id) {
 		try {
-	
+
 			Professor prof = professorService.findById(id);
-	
+
 			return new ResponseEntity<>(HttpStatus.OK).ok(prof.getProvas());
-		
+
 		} catch (Exception e) {
 			return ResponseEntity.noContent().build();
 		}
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
