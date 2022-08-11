@@ -21,7 +21,7 @@ public class ProvaService {
 		provaRepository.saveAll(Arrays.asList(prova));
 	}
 	
-	public Prova findById(String id) {
+	public Prova findById(Integer id) {
 		return provaRepository.findById(id).get();
 	}
 	

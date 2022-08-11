@@ -13,7 +13,7 @@ import br.com.easyfinapi.domains.enums.Perfil;
 
 public class UsuarioSS implements UserDetails {
 
-	private String id;
+	private Integer id;
 	private String email;
 	private String senha;
 	private Collection<? extends GrantedAuthority> authorities;
@@ -21,7 +21,7 @@ public class UsuarioSS implements UserDetails {
 	public UsuarioSS() {
 	}
 
-	public UsuarioSS(String id, String email, String senha, Set<Perfil> authorities) {
+	public UsuarioSS(Integer id, String email, String senha, Set<Perfil> authorities) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -30,11 +30,11 @@ public class UsuarioSS implements UserDetails {
 				.collect(Collectors.toList());
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

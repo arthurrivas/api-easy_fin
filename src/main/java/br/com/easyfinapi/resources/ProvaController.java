@@ -1,27 +1,18 @@
 package br.com.easyfinapi.resources;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.easyfinapi.domains.Professor;
 import br.com.easyfinapi.domains.Prova;
-import br.com.easyfinapi.domains.Questao;
-import br.com.easyfinapi.dtos.ProvaDTO;
-import br.com.easyfinapi.dtos.QuestaoDTO;
+import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.security.UsuarioSS;
-import br.com.easyfinapi.services.ProfessorService;
+import br.com.easyfinapi.services.ManagerService;
 import br.com.easyfinapi.services.ProvaService;
 import br.com.easyfinapi.services.QuestaoService;
 import br.com.easyfinapi.services.UserServices;
@@ -34,7 +25,7 @@ public class ProvaController {
 	UserServices userService;
 
 	@Autowired
-	ProfessorService professorService;
+	ManagerService teacherService;
 
 	@Autowired
 	ProvaService provaService;
@@ -42,104 +33,104 @@ public class ProvaController {
 	@Autowired
 	QuestaoService questaoService;
 
-	@GetMapping
-	public ResponseEntity<?> getProvas() {
+//	@GetMapping
+//	public ResponseEntity<?> getProvas() {
+//
+//		UsuarioSS ss = userService.isAuthenticated();
+//
+//		if (ss.getId() != null) {
+//			User teacher = teacherService.findById(ss.getId());
+//
+//			List<Prova> listaProvas = teacher.getProvas();
+//
+//			return new ResponseEntity<>(HttpStatus.OK).ok(listaProvas);
+//		}
+//
+//		return ResponseEntity.noContent().build();
+//
+//	}
 
-		UsuarioSS ss = userService.isAuthenticated();
+//	@PostMapping
+//	public ResponseEntity<?> addProvas(@RequestBody ProvaDTO provaDTO) {
+//
+//		UsuarioSS ss = userService.isAuthenticated();
+//
+//		Teacher teacher = new Teacher();
+//
+//		if (ss.getId() != null) {
+//
+//			teacher = teacherService.findById(ss.getId());
+//
+//			Prova prova = provaService.fromDTO(provaDTO, teacher.getId());
+//
+//			provaService.saveAll(prova);
+//
+//			teacher.addProva(prova);
+//
+//			teacherService.saveAll(Arrays.asList(teacher));
+//		}
+//
+//		return new ResponseEntity<>(HttpStatus.OK).ok(teacher.getProvas());
+//	}
 
-		if (ss.getId() != null) {
-			Professor prof = professorService.findById(ss.getId());
+//	@GetMapping(value = "/{id}")
+//	public ResponseEntity<?> retornaProva(@PathVariable(value = "id") String id) {
+//
+//		try {
+//			Prova prova = provaService.findById(id);
+//			return new ResponseEntity<>(HttpStatus.OK).ok(prova);
+//
+//		} catch (Exception e) {
+//			return ResponseEntity.noContent().build();
+//		}
+//	}
 
-			List<Prova> listaProvas = prof.getProvas();
-
-			return new ResponseEntity<>(HttpStatus.OK).ok(listaProvas);
-		}
-
-		return ResponseEntity.noContent().build();
-
-	}
-
-	@PostMapping
-	public ResponseEntity<?> addProvas(@RequestBody ProvaDTO provaDTO) {
-
-		UsuarioSS ss = userService.isAuthenticated();
-
-		Professor prof = new Professor();
-
-		if (ss.getId() != null) {
-
-			prof = professorService.findById(ss.getId());
-
-			Prova prova = provaService.fromDTO(provaDTO, prof.getId());
-
-			provaService.saveAll(prova);
-
-			prof.addProva(prova);
-
-			professorService.saveAll(Arrays.asList(prof));
-		}
-
-		return new ResponseEntity<>(HttpStatus.OK).ok(prof.getProvas());
-	}
-
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> retornaProva(@PathVariable(value = "id") String id) {
-
-		try {
-			Prova prova = provaService.findById(id);
-			return new ResponseEntity<>(HttpStatus.OK).ok(prova);
-
-		} catch (Exception e) {
-			return ResponseEntity.noContent().build();
-		}
-	}
-
-	@GetMapping(value = "/{id}/questoes")
-	public ResponseEntity<?> retornaQuestoesProva(@PathVariable(value = "id") String id) {
-
-		try {
-			Prova prova = provaService.findById(id);
-			List<Questao> listaQuestoes = prova.getListaQuestoes();
-			return new ResponseEntity<>(HttpStatus.OK).ok(listaQuestoes);
-
-		} catch (Exception e) {
-			return ResponseEntity.noContent().build();
-		}
-	}
-
-	@PostMapping(value = "/{id}/questoes")
-	public ResponseEntity<?> addQuestaoProva(@PathVariable(value = "id") String id, QuestaoDTO questaoDTO) {
-
-		UsuarioSS ss = userService.isAuthenticated();
-		Prova prova = provaService.findById(id);
-
-		if (ss.getId() != prova.getId()) {
-			try {
-				
-				Questao questao = questaoService.fromDTO(questaoDTO);
-				
-				prova.adicionaQuestao(questao);
-				
-				provaService.saveAll(prova);
-				
-				return new ResponseEntity<>(HttpStatus.OK).ok(prova);
-
-			} catch (Exception e) {
-				return ResponseEntity.noContent().build();
-			}
-		}
-		return ResponseEntity.noContent().build();
-	}
-
-	@DeleteMapping(value = "/{idProva}/questao/{idQuestao}")
-	public ResponseEntity<?> deletaQuestao(@PathVariable(value = "id")String idProva, 
-											@PathVariable(value = "idQuestao")String idQuestao ){
-		
-		Prova prova = provaService.findById(idProva);
-		//precisa ser implementado a função de deletar a questão usando o id dela		
-		
-		return new ResponseEntity(HttpStatus.NO_CONTENT).noContent().build();
-	}
+//	@GetMapping(value = "/{id}/questoes")
+//	public ResponseEntity<?> retornaQuestoesProva(@PathVariable(value = "id") String id) {
+//
+//		try {
+//			Prova prova = provaService.findById(id);
+//			List<Questao> listaQuestoes = prova.getListaQuestoes();
+//			return new ResponseEntity<>(HttpStatus.OK).ok(listaQuestoes);
+//
+//		} catch (Exception e) {
+//			return ResponseEntity.noContent().build();
+//		}
+//	}
+//
+//	@PostMapping(value = "/{id}/questoes")
+//	public ResponseEntity<?> addQuestaoProva(@PathVariable(value = "id") String id, QuestaoDTO questaoDTO) {
+//
+//		UsuarioSS ss = userService.isAuthenticated();
+//		Prova prova = provaService.findById(id);
+//
+//		if (ss.getId() != prova.getId()) {
+//			try {
+//				
+//				Questao questao = questaoService.fromDTO(questaoDTO);
+//				
+//				prova.adicionaQuestao(questao);
+//				
+//				provaService.saveAll(prova);
+//				
+//				return new ResponseEntity<>(HttpStatus.OK).ok(prova);
+//
+//			} catch (Exception e) {
+//				return ResponseEntity.noContent().build();
+//			}
+//		}
+//		return ResponseEntity.noContent().build();
+//	}
+//
+//	@DeleteMapping(value = "/{idProva}/questao/{idQuestao}")
+//	public ResponseEntity<?> deletaQuestao(@PathVariable(value = "id")String idProva, 
+//											@PathVariable(value = "idQuestao")String idQuestao ){
+//		
+//		Prova prova = provaService.findById(idProva);
+//		//precisa ser implementado a função de deletar a questão usando o id dela		
+//		
+//		return new ResponseEntity(HttpStatus.NO_CONTENT).noContent().build();
+//	}
 }
 
 

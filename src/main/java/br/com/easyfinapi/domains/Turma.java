@@ -1,98 +1,89 @@
 package br.com.easyfinapi.domains;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Document
+@Entity
 public class Turma {
-	
-	@Id
-	protected String id;
 
-	protected String nome;
-	protected String materia;
-	
-	@DBRef
-	protected Professor professor;
-	
-	@JsonIgnore
-	@DBRef
-	protected List<Aluno> listaAlunos = new ArrayList();
-	protected List<Prova> listaProvas = new ArrayList();
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	protected Integer id;
+
+	protected String name;
+	// protected String materia;
+	protected Date startDate;
+//
+//	@ManyToOne
+//	protected User teacher;
+
+//	@JsonIgnore
+//	@ManyToMany
+//	protected List<User> listaAlunos = new ArrayList();
+//	protected List<Prova> listaProvas = new ArrayList();
+
 	// Sera acrescentado aqui uma lista de aulas!
-	
-	protected Date dataInicio;
-	
+
 	public Turma() {
 	}
-	
 
-	public Turma(String id, Professor professor, Date dataInicio) {
+	public Turma(Integer id, User teacher, Date startDate) {
 		this.id = id;
-		this.professor = professor;
-		this.dataInicio = dataInicio;
-	}
-	
-	
-	public void addAluno(Aluno aluno) {
-		this.listaAlunos.add(aluno);
-	}
-	
-	public void addAlunos(List<Aluno> lista) {
-		this.listaAlunos.addAll(lista);
+//		this.teacher = teacher;
+		this.startDate = startDate;
 	}
 
-	public String getId() {
+//	public void addAluno(User aluno) {
+//		this.listaAlunos.add(aluno);
+//	}
+//	
+//	public void addAlunos(List<User> lista) {
+//		this.listaAlunos.addAll(lista);
+//	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Professor getProfessor() {
-		return professor;
-	}
+//	public User getTeacher() {
+//		return this.teacher;
+//	}
+//
+//	public void setProfessor(User teacher) {
+//		this.teacher = teacher;
+//	}
 
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
-	}
+//	public List<User> getListaAlunos() {
+//		return listaAlunos;
+//	}
+//
+//	public void setListaAlunos(List<User> listaAlunos) {
+//		this.listaAlunos = listaAlunos;
+//	}
+//
+//	public List<Prova> getListaProvas() {
+//		return listaProvas;
+//	}
+//
+//	public void setListaProvas(List<Prova> listaProvas) {
+//		this.listaProvas = listaProvas;
+//	}
 
-	public List<Aluno> getListaAlunos() {
-		return listaAlunos;
-	}
+//	public Date getStartDate() {
+//		return startDate;
+//	}
+//
+//	public void setDataInicio(Date startDate) {
+//		this.startDate = startDate;
+//	}
 
-	public void setListaAlunos(List<Aluno> listaAlunos) {
-		this.listaAlunos = listaAlunos;
-	}
-
-	public List<Prova> getListaProvas() {
-		return listaProvas;
-	}
-
-	public void setListaProvas(List<Prova> listaProvas) {
-		this.listaProvas = listaProvas;
-	}
-
-	public Date getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-	
-	
-	
-	
-	
-	
 }

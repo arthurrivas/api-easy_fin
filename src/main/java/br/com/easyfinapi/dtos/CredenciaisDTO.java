@@ -6,14 +6,14 @@ public class CredenciaisDTO {
 	
 	
 	private String email;
-	private String senha;
+	private String password;
 	
 	public CredenciaisDTO() {
 	}
 	
-	public CredenciaisDTO(String email, String senha) {
+	public CredenciaisDTO(String email, String password) {
 		this.email = email;
-		this.senha = senha;
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -24,12 +24,12 @@ public class CredenciaisDTO {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getpassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setpassword(String password) {
+		this.password = password;
 	}
 	
 	

@@ -1,17 +1,18 @@
 package br.com.easyfinapi.domains;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Document
+@Entity
 public class Prova {
 
-	@Id
-	private String id;
+	@Id	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer id;
 	private String titulo;
 	
 //	private Date dataInicio;
@@ -20,30 +21,30 @@ public class Prova {
 	private String idProfessorCriador;
 	
 	
-	private List<Questao> listaQuestoes = new ArrayList<>();
+//	private List<Questao> listaQuestoes = new ArrayList<>();
 	
 	
 	public Prova() {
 	}
 
 	
-	public Prova(String id, String titulo, List<Questao> listaQuestoes, String idProfessor) {
+	public Prova(Integer id, String titulo, List<Questao> listaQuestoes, String idProfessor) {
 		this.id = id;
 		this.titulo = titulo;
-		this.listaQuestoes = listaQuestoes;
+//		this.listaQuestoes = listaQuestoes;
 		this.idProfessorCriador = idProfessor;
 	}
 
 
-	public void adicionaQuestao(Questao questao) {
-		this.listaQuestoes.add(questao);
-	}
+//	public void adicionaQuestao(Questao questao) {
+//		this.listaQuestoes.add(questao);
+//	}
 	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -66,13 +67,13 @@ public class Prova {
 	}
 
 
-	public List<Questao> getListaQuestoes() {
-		return listaQuestoes;
-	}
+//	public List<Questao> getListaQuestoes() {
+//		return listaQuestoes;
+//	}
 
-	public void setListaQuestoes(List<Questao> listaQuestoes) {
-		this.listaQuestoes = listaQuestoes;
-	}
+//	public void setListaQuestoes(List<Questao> listaQuestoes) {
+//		this.listaQuestoes = listaQuestoes;
+//	}
 	
 	
 }

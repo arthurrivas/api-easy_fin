@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.easyfinapi.domains.Professor;
+import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.security.UsuarioSS;
-import br.com.easyfinapi.services.ProfessorService;
+import br.com.easyfinapi.services.ManagerService;
 import br.com.easyfinapi.services.UserServices;
 
 @RestController
@@ -20,25 +20,22 @@ public class UsersController {
 	UserServices userService;
 	
 	@Autowired
-	ProfessorService professorService;
+	ManagerService managerService;
 	
 	
 	@GetMapping
-	public ResponseEntity<?> recuperaInfoUsuarioLogado(){
+	public ResponseEntity<?> getInfologgedUser(){
 		
 		UsuarioSS ss = userService.isAuthenticated();
 		
 		if(ss.userHasAuthority("ROLE_PROFESSOR")) {
 			
-			Professor prof = professorService.findByEmail(ss.getUsername());
+			User user = userService.findByEmail(ss.getUsername());
 			
-			return new ResponseEntity<>(HttpStatus.OK).ok(prof);
+			return new ResponseEntity<>(HttpStatus.OK).ok(user);
 			
 		}
-		
-		
-		
-		
+
 		return null;
 		
 	}

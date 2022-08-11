@@ -19,7 +19,7 @@ public class TurmaService {
 		return turmaRepository.findAll();
 	}
 	
-	public Turma findById(String id) {
+	public Turma findById(Integer id) {
 		return turmaRepository.findById(id).get();
 	}
 	

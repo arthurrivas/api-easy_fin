@@ -40,7 +40,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 					.readValue(req.getInputStream(), CredenciaisDTO.class);
 			
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(cred.getEmail(),
-																									cred.getSenha(),
+																									cred.getpassword(),
 																									new ArrayList<>());
 			auth = authenticationManager.authenticate(authToken);
 		
