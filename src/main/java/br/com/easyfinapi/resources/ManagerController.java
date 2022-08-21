@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import br.com.easyfinapi.services.UserServices;
 
 @RestController
 @RequestMapping(value = "/manager")
-public class ProfessorController {
+public class ManagerController {
 
 	@Autowired
 	UserServices userService;
@@ -31,8 +32,8 @@ public class ProfessorController {
 	@PostMapping
 	public ResponseEntity<?> createManager(@RequestBody CreateUserDTO managerDTO) {
 
-		User manager = userService.fromUserDTOToManager(managerDTO, Perfil.ROLE_PROFESSOR);
-
+		User manager = userService.fromUserDTO(managerDTO, Perfil.ROLE_PROFESSOR.getCodPerfil());
+		
 		userService.SaveAll(Arrays.asList(manager));
 
 		return new ResponseEntity<User>(HttpStatus.CREATED).ok(manager);

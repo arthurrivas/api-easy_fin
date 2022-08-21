@@ -37,7 +37,8 @@ public class UserServices {
 
 		return userRepository.findAll();
 	}
-
+	
+	
 	public void SaveAll(List<User> lista) {
 		userRepository.saveAll(lista);
 	}
@@ -46,8 +47,9 @@ public class UserServices {
 		userRepository.deleteAll();
 	}
 
-	public User fromUserDTOToManager(CreateUserDTO managerDTO, Perfil perfil) {
-		return new User(null, managerDTO.getName(), managerDTO.getEmail(), pe.encode(managerDTO.getPassword()), perfil);
+	public User fromUserDTO(CreateUserDTO managerDTO, Integer perfilId) {
+		
+		return new User(null, managerDTO.getName(), managerDTO.getEmail(), pe.encode(managerDTO.getPassword()), Perfil.toEnum(perfilId));
 	}
 
 	public UsuarioSS isAuthenticated() {

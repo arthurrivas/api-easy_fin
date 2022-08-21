@@ -32,12 +32,12 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter{
 	JwtUtil jwtUtil;
 	
 	private static final String[] PUBLIC_GET_MATCHERS = {
-			"/professor/**",
+			"/manager/**",
 			"/login"
 	};
 	private static final String[] PUBLIC_POST_MATCHERS = {
 			"/login",
-			"/professor/**"
+			"/manager/**"
 	};
 	
 	private static final String[] ADMIN_MATCHERS = {
@@ -49,10 +49,10 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable();
 		http.authorizeRequests()
-			.antMatchers(HttpMethod.GET, PUBLIC_GET_MATCHERS).permitAll()
-			.antMatchers(HttpMethod.POST, PUBLIC_POST_MATCHERS).permitAll()
+//			.antMatchers(HttpMethod.GET, PUBLIC_GET_MATCHERS).permitAll()
+//			.antMatchers(HttpMethod.POST, PUBLIC_POST_MATCHERS).permitAll()
 //			.antMatchers(ADMIN_MATCHERS).hasRole("PROFESSOR")
-			.anyRequest().authenticated();
+			.anyRequest().permitAll();
 		http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userDetailService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

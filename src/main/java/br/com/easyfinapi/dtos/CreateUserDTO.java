@@ -9,7 +9,7 @@ public class CreateUserDTO {
 	public CreateUserDTO() {
 	}
 
-	public CreateUserDTO(String name, String email, String password) {
+	public CreateUserDTO(String name, String email, String password, Integer typeUser) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -39,7 +39,5 @@ public class CreateUserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
 }
