@@ -26,6 +26,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 	private String name;
+	
+	@Column(unique = true)
 	private String email;
 
 	@JsonIgnore
@@ -37,7 +39,7 @@ public class User {
 	private Set<Integer> perfis = new HashSet<>();
 
 	public User() {
-	}
+	}	
 
 	public User(Integer id, String name, String email, String password, Perfil perfil) {
 		this.id = id;
@@ -45,6 +47,13 @@ public class User {
 		this.email = email;
 		this.password = password;
 		addPerfil(perfil);
+	}
+	
+	public User(Integer id, String name, String email, String password) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
 	}
 
 	public Integer getId() {
@@ -75,12 +84,11 @@ public class User {
 		return password;
 	}
 
-	public void setSenha(String senha) {
+	public void setPassword(String senha) {
 		this.password = senha;
 	}
 
 	public Set<Perfil> getPerfis() {
-
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 

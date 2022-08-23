@@ -32,7 +32,7 @@ public class ManagerController {
 	@PostMapping
 	public ResponseEntity<?> createManager(@RequestBody CreateUserDTO managerDTO) {
 
-		User manager = userService.fromUserDTO(managerDTO, Perfil.ROLE_PROFESSOR.getCodPerfil());
+		User manager = userService.fromUserDTO(managerDTO, Perfil.MANAGER.getCodPerfil());
 		
 		userService.SaveAll(Arrays.asList(manager));
 

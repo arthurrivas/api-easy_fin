@@ -2,9 +2,9 @@ package br.com.easyfinapi.domains.enums;
 
 public enum Perfil {
 
-	ROLE_ADMIN(1, "ROLE_ADMIM"), 
-	ROLE_PROFESSOR(2, "ROLE_PROFESSOR"), 
-	ROLE_ALUNO(3, "ROLE_ALUNO");
+	ADMIN(1, "ROLE_ADMIM"), 
+	MANAGER(2, "ROLE_MANAGER"), 
+	STUDENT(3, "ROLE_STUDENT");
 
 	private Integer codPerfil;
 	private String descricaoPerfil;

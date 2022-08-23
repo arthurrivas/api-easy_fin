@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.domains.enums.Perfil;
 import br.com.easyfinapi.dtos.CreateUserDTO;
+import br.com.easyfinapi.dtos.UpdateUserDTO;
 import br.com.easyfinapi.repositorys.UserRepository;
 import br.com.easyfinapi.security.UsuarioSS;
 
@@ -42,15 +43,36 @@ public class UserServices {
 	public void SaveAll(List<User> lista) {
 		userRepository.saveAll(lista);
 	}
+	
+	public void Save(User user) {
+		userRepository.save(user);
+	}
+	
+	public User update(Integer id, UpdateUserDTO newData) {
+		
+		User user = findById(id);
+		
+		user.setEmail(newData.getEmail());
+		user.setName(newData.getName());
+		user.setPassword(newData.getPassword());
+		
+		Save(user);
+		
+		return user;
+	}
+	
+	public void deleteById(Integer id) {
+		userRepository.deleteById(id);
+	}
 
 	public void deleteAll() {
 		userRepository.deleteAll();
 	}
 
-	public User fromUserDTO(CreateUserDTO managerDTO, Integer perfilId) {
-		
-		return new User(null, managerDTO.getName(), managerDTO.getEmail(), pe.encode(managerDTO.getPassword()), Perfil.toEnum(perfilId));
+	public User fromUserDTO(CreateUserDTO userDTO, Integer perfilId) {
+		return new User(null, userDTO.getName(), userDTO.getEmail(), pe.encode(userDTO.getPassword()), Perfil.toEnum(perfilId));
 	}
+	
 
 	public UsuarioSS isAuthenticated() {
 		return (UsuarioSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

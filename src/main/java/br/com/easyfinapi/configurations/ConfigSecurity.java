@@ -37,11 +37,10 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter{
 	};
 	private static final String[] PUBLIC_POST_MATCHERS = {
 			"/login",
-			"/manager/**"
 	};
 	
 	private static final String[] ADMIN_MATCHERS = {
-			"/professor"
+			"/MANAGER"
 	};
 	
 	
