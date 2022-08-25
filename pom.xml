@@ -46,6 +46,26 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+		<dependency>
+			<!-- validations -->
+			<groupId>javax.validation</groupId>
+
+			<artifactId>validation-api</artifactId>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.hibernate</groupId>
+
+			<artifactId>hibernate-validator</artifactId>
+
+			<version>6.1.5.Final</version>
+
+		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>

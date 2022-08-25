@@ -1,8 +1,5 @@
 package br.com.easyfinapi.resources;
 
-import java.util.Arrays;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.dtos.CreateUserDTO;
-import br.com.easyfinapi.dtos.UpdateUserDTO;
 import br.com.easyfinapi.security.UsuarioSS;
 import br.com.easyfinapi.services.ManagerService;
 import br.com.easyfinapi.services.UserServices;
@@ -45,7 +41,7 @@ public class UsersController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateInfoUser(@PathVariable(name = "id") Integer id,@RequestBody UpdateUserDTO userUpdate) {
+	public ResponseEntity<?> updateInfoUser(@PathVariable(name = "id") Integer id,@RequestBody CreateUserDTO userUpdate) {
 		try {
 
 			UsuarioSS ss = userService.isAuthenticated();
@@ -89,8 +85,7 @@ public class UsersController {
 		} catch (
 
 		Exception e) {
-			System.out.println(e.getMessage());
-			return null;
+			return ResponseEntity.notFound().build();
 		}
 
 	}

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.domains.enums.Perfil;
 import br.com.easyfinapi.dtos.CreateUserDTO;
-import br.com.easyfinapi.dtos.UpdateUserDTO;
 import br.com.easyfinapi.repositorys.UserRepository;
 import br.com.easyfinapi.security.UsuarioSS;
 
@@ -48,7 +47,7 @@ public class UserServices {
 		userRepository.save(user);
 	}
 	
-	public User update(Integer id, UpdateUserDTO newData) {
+	public User update(Integer id, CreateUserDTO newData) {
 		
 		User user = findById(id);
 		

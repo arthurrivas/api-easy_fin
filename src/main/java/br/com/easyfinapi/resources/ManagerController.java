@@ -3,6 +3,8 @@ package br.com.easyfinapi.resources;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,7 @@ public class ManagerController {
 	ProvaService provaService;
 
 	@PostMapping
-	public ResponseEntity<?> createManager(@RequestBody CreateUserDTO managerDTO) {
+	public ResponseEntity<?> createManager(@Valid @RequestBody CreateUserDTO managerDTO) {
 
 		User manager = userService.fromUserDTO(managerDTO, Perfil.MANAGER.getCodPerfil());
 		
@@ -40,14 +42,14 @@ public class ManagerController {
 
 	}
 
-	@GetMapping
-	public ResponseEntity<?> getManagers() {
-
-		List<User> managerList = userService.findAll();
-
-		return new ResponseEntity<>(HttpStatus.OK).ok(managerList);
-
-	}
+//	@GetMapping
+//	public ResponseEntity<?> getManagers() {
+//
+//		List<User> managerList = userService.findAll();
+//
+//		return new ResponseEntity<>(HttpStatus.OK).ok(managerList);
+//
+//	}
 
 //	@GetMapping("/{id}/provas")
 //	public ResponseEntity<?> listaProvasByIdProfessor(@PathVariable(value = "id") Integer id) {
