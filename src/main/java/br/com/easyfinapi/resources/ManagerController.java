@@ -1,15 +1,12 @@
 package br.com.easyfinapi.resources;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.domains.enums.Perfil;
 import br.com.easyfinapi.dtos.CreateUserDTO;
-import br.com.easyfinapi.services.ProvaService;
+import br.com.easyfinapi.services.QuizService;
 import br.com.easyfinapi.services.UserServices;
 
 @RestController
@@ -29,7 +26,7 @@ public class ManagerController {
 	UserServices userService;
 
 	@Autowired
-	ProvaService provaService;
+	QuizService provaService;
 
 	@PostMapping
 	public ResponseEntity<?> createManager(@Valid @RequestBody CreateUserDTO managerDTO) {
