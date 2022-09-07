@@ -2,10 +2,13 @@ package br.com.easyfinapi.domains;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ClassRoom {
@@ -17,7 +20,7 @@ public class ClassRoom {
 	protected String name;
 	protected Date startDate;
 	
-	
+	@ManyToOne(fetch = FetchType.EAGER,  cascade=CascadeType.ALL)
 	protected User manager;
 
 
