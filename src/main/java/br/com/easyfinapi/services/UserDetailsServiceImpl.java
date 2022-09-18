@@ -7,12 +7,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.easyfinapi.domains.User;
+import br.com.easyfinapi.repositorys.ManagerRepository;
 import br.com.easyfinapi.repositorys.UserRepository;
 import br.com.easyfinapi.security.UsuarioSS;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-	
 	
 	@Autowired
 	private UserRepository userRepository;

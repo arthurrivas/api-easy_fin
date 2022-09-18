@@ -13,13 +13,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.easyfinapi.domains.enums.Perfil;
 
-@Entity(name = "usuarios")
+@Entity(name = "USERS")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
 	@Id
@@ -37,7 +39,8 @@ public class User {
 	@CollectionTable(name = "PERFIS")
 	@Column(name = "id_perfil")
 	private Set<Integer> perfis = new HashSet<>();
-
+	
+	
 	public User() {
 	}	
 
@@ -95,6 +98,8 @@ public class User {
 	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCodPerfil());
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
