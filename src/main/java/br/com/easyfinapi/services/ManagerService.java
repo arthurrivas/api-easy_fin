@@ -38,10 +38,14 @@ public class ManagerService {
 		 return manager;
 	}
 	
+	public void deleteById(Integer id ) {
+		managerRepository.deleteById(id);
+	}
 	
 	public Manager fromDTO(ManagerDTO managerDTO) {
 		return new Manager(null, managerDTO.getName(), managerDTO.getEmail(), pe.encode(managerDTO.getPassword()),Perfil.MANAGER);
 	}
+	
 	
 	
 }
