@@ -1,6 +1,10 @@
 package br.com.easyfinapi.domains;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import br.com.easyfinapi.domains.enums.Perfil;
@@ -9,26 +13,28 @@ import br.com.easyfinapi.domains.enums.Perfil;
 @PrimaryKeyJoinColumn(name="idManager")
 public class Manager extends User {
 	
-	private String regQuiz;
+	
+	@OneToMany(mappedBy = "manager")
+	private List<Course> courses = new ArrayList<>();
 	
 	public Manager() {
 	}
 
-	public Manager(String regQuiz, Integer id, String name, String email, String password, Perfil perfil) {
-		super(id, name, email, password, perfil);
-		this.regQuiz = regQuiz;
-	}
-	
 	public Manager(Integer id, String name, String email, String password, Perfil perfil) {
 		super(id, name, email, password, perfil);
+		
 	}
 
-	public String getRegQuiz() {
-		return regQuiz;
+	public void addCourse(Course course){
+		this.courses.add(course);
+	}
+	
+	public List<Course> getCourses() {
+		return courses;
 	}
 
-	public void setRegQuiz(String regQuiz) {
-		this.regQuiz = regQuiz;
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 
 	@Override
