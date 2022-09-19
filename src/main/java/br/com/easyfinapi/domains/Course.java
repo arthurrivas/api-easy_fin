@@ -24,11 +24,12 @@ public class Course {
 	public Course() {
 	}
 	
-	public Course(Integer id, String title, String description) {
+	public Course(Integer id, String title, String description, Manager manager) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
+		this.manager = manager;
 	}
 
 	public Integer getId() {
@@ -54,6 +55,13 @@ public class Course {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
 	
 }
