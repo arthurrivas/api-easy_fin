@@ -9,14 +9,16 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.easyfinapi.domains.enums.Perfil;
 
 @Entity
 @PrimaryKeyJoinColumn(name="idManager")
 public class Manager extends User {
 	
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "manager")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "manager")
 	private List<Course> courses = new ArrayList<>();
 	
 	public Manager() {

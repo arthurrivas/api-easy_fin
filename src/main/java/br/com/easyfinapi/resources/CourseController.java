@@ -1,8 +1,11 @@
 package br.com.easyfinapi.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,20 @@ public class CourseController {
 	CourseService courseService;
 	@Autowired
 	ManagerService managerService;
+	
+	@GetMapping(value = "/manager/{id}")
+	public ResponseEntity<?> getCourseByManagerId(@PathVariable(name = "id") Integer id){
+		try {
+			
+			List<Course> course = managerService.findById(id).getCourses();
+			
+			return new ResponseEntity(HttpStatus.OK).ok(course);
+			
+		} catch (Exception e) {
+			return ResponseEntity.noContent().build();
+		}
+		
+	}
 	
 	@PostMapping(value = "/manager/{id}")
 	public ResponseEntity<?> createCourse(@PathVariable(name = "id") Integer id, @RequestBody CourseDTO courseDTO ){
