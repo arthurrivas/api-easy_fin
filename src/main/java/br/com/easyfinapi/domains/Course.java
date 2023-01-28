@@ -1,5 +1,8 @@
 package br.com.easyfinapi.domains;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,12 +25,13 @@ public class Course {
 	private String title;
 	private String description;
 	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "course")
+	private List<CourseStage> courseStages = new ArrayList<>();
+	
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="manager_id")
     private Manager manager;
-	
-	
 	
 	public Course() {
 	}
@@ -71,4 +76,15 @@ public class Course {
 		this.manager = manager;
 	}
 	
+	public List<CourseStage> getCourseStages() {
+		return courseStages;
+	}
+
+	public void setCourseStages(List<CourseStage> courseStages) {
+		this.courseStages = courseStages;
+	}
+
+	public void addCourseStage(CourseStage courseStage) {
+		this.courseStages.add(courseStage);
+	}	
 }

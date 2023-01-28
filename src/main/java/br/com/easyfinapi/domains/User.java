@@ -1,5 +1,6 @@
 package br.com.easyfinapi.domains;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -31,6 +32,8 @@ public class User {
 	
 	@Column(unique = true)
 	private String email;
+	private String phone;
+	private Date birthday;
 
 	@JsonIgnore
 	private String password;
@@ -40,24 +43,18 @@ public class User {
 	@Column(name = "id_perfil")
 	private Set<Integer> perfis = new HashSet<>();
 	
-	
 	public User() {
 	}	
 
-	public User(Integer id, String name, String email, String password, Perfil perfil) {
+	public User(Integer id, String name, String email,String phone, String password, Perfil perfil) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.phone = phone;
 		this.password = password;
 		addPerfil(perfil);
 	}
 	
-	public User(Integer id, String name, String email, String password) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
 
 	public Integer getId() {
 		return id;
@@ -116,6 +113,22 @@ public class User {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+	
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	@Override

@@ -1,12 +1,21 @@
 package br.com.easyfinapi.domains;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@MappedSuperclass
-public class CourseStage {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity(name = "COURSE_STAGE")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class CourseStage {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -14,6 +23,11 @@ public class CourseStage {
 	
 	private String title;
 	private String description;
+	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="course_id")
+    private Course course;
 	
 	public CourseStage() {
 	}
@@ -47,5 +61,12 @@ public class CourseStage {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 }

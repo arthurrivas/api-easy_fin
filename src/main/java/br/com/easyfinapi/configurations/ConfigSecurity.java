@@ -3,7 +3,6 @@ package br.com.easyfinapi.configurations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,8 +17,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import br.com.easyfinapi.security.JwtAuthenticationFilter;
 import br.com.easyfinapi.security.JwtAuthorizationFilter;
 import br.com.easyfinapi.security.JwtUtil;
-
-
 
 @Configuration
 @EnableWebSecurity
@@ -40,7 +37,7 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter{
 	};
 	
 	private static final String[] ADMIN_MATCHERS = {
-			"/MANAGER"
+			"/user/current"
 	};
 	
 	
@@ -50,7 +47,7 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 //			.antMatchers(HttpMethod.GET, PUBLIC_GET_MATCHERS).permitAll()
 //			.antMatchers(HttpMethod.POST, PUBLIC_POST_MATCHERS).permitAll()
-//			.antMatchers(ADMIN_MATCHERS).hasRole("PROFESSOR")
+			.antMatchers(ADMIN_MATCHERS).hasAnyRole("MANAGER")
 			.anyRequest().permitAll();
 		http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userDetailService));

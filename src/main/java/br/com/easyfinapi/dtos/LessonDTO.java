@@ -1,18 +1,18 @@
 package br.com.easyfinapi.dtos;
 
+public class LessonDTO {
 
-public class CourseDTO {
-	
 	private String title;
 	private String description;
+	private String videoURL;
 	
-	public CourseDTO() {
+	public LessonDTO() {
 	}
 	
-	public CourseDTO(String title, String description) {
-		super();
+	public LessonDTO(String title, String description, String videoURL) {
 		this.title = title;
 		this.description = description;
+		this.videoURL = videoURL;
 	}
 
 	public String getTitle() {
@@ -30,5 +30,12 @@ public class CourseDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public String getVideoURL() {
+		return videoURL;
+	}
+
+	public void setVideoURL(String videoURL) {
+		this.videoURL = videoURL;
+	}
 }

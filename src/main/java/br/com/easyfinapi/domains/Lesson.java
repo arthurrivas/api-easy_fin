@@ -1,8 +1,10 @@
 package br.com.easyfinapi.domains;
 
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name="idLesson")
 public class Lesson extends CourseStage {
 
 	private String videoURL;

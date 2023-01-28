@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.easyfinapi.domains.Course;
 import br.com.easyfinapi.domains.Manager;
-import br.com.easyfinapi.domains.DTO.CourseDTO;
+import br.com.easyfinapi.dtos.CourseDTO;
 import br.com.easyfinapi.repositorys.CourseRepository;
+import br.com.easyfinapi.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CourseService {
@@ -20,6 +21,13 @@ public class CourseService {
 		return course;
 	}
 	
+	public Course findById(Integer id) {
+		Course course = courseRepository.findById(id).get();
+		
+		if (course == null) throw new ObjectNotFoundException("Curso não encontrado");
+		
+		return course;
+	}
 	
 	public Course fromDTO(CourseDTO courseDTO, Manager manager) {
 		return new Course(null, courseDTO.getTitle(), courseDTO.getDescription(), manager);

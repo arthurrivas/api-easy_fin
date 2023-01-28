@@ -90,4 +90,9 @@ public class UsuarioSS implements UserDetails {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "UsuarioSS [id=" + id + ", email=" + email + ", senha=" + senha + ", authorities=" + authorities + "]";
+	}
+
 }

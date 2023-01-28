@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easyfinapi.domains.Manager;
-import br.com.easyfinapi.domains.DTO.ManagerDTO;
 import br.com.easyfinapi.domains.enums.Perfil;
+import br.com.easyfinapi.dtos.NewUserDTO;
 import br.com.easyfinapi.security.UsuarioSS;
 import br.com.easyfinapi.services.ManagerService;
 import br.com.easyfinapi.services.UserServices;
@@ -30,7 +30,7 @@ public class ManagerController {
 	UserServices userService;
 
 	@PostMapping
-	public ResponseEntity<?> createManager(@RequestBody ManagerDTO managerDTO) {
+	public ResponseEntity<?> createManager(@RequestBody NewUserDTO managerDTO) {
 
 		Manager manager = managerService.fromDTO(managerDTO);
 
@@ -54,10 +54,10 @@ public class ManagerController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> updateManager(@PathVariable(name = "id") Integer id, @RequestBody ManagerDTO managerDTO) {
+	public ResponseEntity<?> updateManager(@PathVariable(name = "id") Integer id, @RequestBody NewUserDTO managerDTO) {
 		try {
 			UsuarioSS ss = userService.isAuthenticated();
-			if (ss.getId() == id || ss.getAuthorities().contains(Perfil.ADMIN) ) {
+			if (ss.getId() == id || ss.getAuthorities().contains(Perfil.ROLE_ADMIN) ) {
 
 				Manager manager = managerService.fromDTO(managerDTO);
 				manager.setId(id);
