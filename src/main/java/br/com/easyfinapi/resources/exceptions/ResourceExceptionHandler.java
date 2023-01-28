@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.easyfinapi.services.exceptions.ObjectNotFoundException;
-import br.com.easyfinapi.services.exceptions.UserNotFoundException;
+import br.com.easyfinapi.services.exceptions.ObjNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -20,7 +20,7 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 	
-	@ExceptionHandler(UserNotFoundException.class)
+	@ExceptionHandler(ObjNotFoundException.class)
 	public ResponseEntity<StandartError> UserNotFound(ObjectNotFoundException e, HttpServletRequest req){
 		
 		StandartError err = new StandartError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());

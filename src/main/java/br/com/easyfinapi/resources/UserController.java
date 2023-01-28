@@ -24,8 +24,6 @@ public class UserController {
 		UsuarioSS ss = userService.isAuthenticated();
 		
 		User user = userService.findById(ss.getId());
-
-		System.out.println(user);
 		
 		return new ResponseEntity<>(HttpStatus.OK).ok(user);
 

@@ -24,9 +24,8 @@ public class Manager extends User {
 	public Manager() {
 	}
 
-	public Manager(Integer id, String name, String email, String phone, String password, Perfil perfil) {
+	public Manager(Integer id, String name, String email, String phone, String password , Perfil perfil) {
 		super(id, name, email,phone, password, perfil);
-		
 	}
 
 	public void addCourse(Course course){

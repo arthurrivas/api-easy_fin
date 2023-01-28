@@ -6,11 +6,12 @@ public class NewUserDTO {
 	private String email;
 	private String phone;
 	private String password;
+	private String address;
 	
 	public NewUserDTO() {
 	}
 	
-	public NewUserDTO(String name, String email,String phone, String password) {
+	public NewUserDTO(String name, String email,String phone, String password, String address) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -49,8 +50,13 @@ public class NewUserDTO {
 	public void setPassword(String passWord) {
 		this.password = passWord;
 	}
-	
-	
-	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	
 }

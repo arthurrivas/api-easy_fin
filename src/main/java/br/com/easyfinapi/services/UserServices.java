@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.repositorys.UserRepository;
 import br.com.easyfinapi.security.UsuarioSS;
-import br.com.easyfinapi.services.exceptions.UserNotFoundException;
+import br.com.easyfinapi.services.exceptions.ObjNotFoundException;
 
 @Service
 public class UserServices {	
@@ -19,7 +19,7 @@ public class UserServices {
 		
 		UsuarioSS ss = (UsuarioSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();			
 		
-		if (ss == null || ss.getId() == null) throw new UserNotFoundException("usuario não encontrado");
+		if (ss == null || ss.getId() == null) throw new ObjNotFoundException("usuario não encontrado");
 		
 		return ss;
 	}

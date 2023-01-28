@@ -44,7 +44,7 @@ public class ManagerService {
 	}
 	
 	public Manager fromDTO(NewUserDTO userDTO) {
-		return new Manager(null, userDTO.getName(), userDTO.getEmail(),userDTO.getPhone(), pe.encode(userDTO.getPassword()),Perfil.ROLE_MANAGER);
+		return new Manager(null, userDTO.getName(), userDTO.getEmail(),userDTO.getPhone(), pe.encode(userDTO.getPassword()) ,Perfil.ROLE_MANAGER);
 	}
 	
 	

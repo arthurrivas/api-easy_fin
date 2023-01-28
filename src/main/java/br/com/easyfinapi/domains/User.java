@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -16,6 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,6 +37,10 @@ public class User {
 	private String email;
 	private String phone;
 	private Date birthday;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
 	@JsonIgnore
 	private String password;
@@ -52,6 +59,15 @@ public class User {
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
+		addPerfil(perfil);
+	}
+	public User(Integer id, String name, String email,String phone, String password, Address address, Perfil perfil) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.password = password;
+		this.address = address;
 		addPerfil(perfil);
 	}
 	
@@ -96,7 +112,13 @@ public class User {
 		perfis.add(perfil.getCodPerfil());
 	}
 	
-	
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	@Override
 	public int hashCode() {
