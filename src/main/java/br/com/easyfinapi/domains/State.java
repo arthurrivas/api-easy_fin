@@ -1,5 +1,6 @@
 package br.com.easyfinapi.domains;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -23,7 +24,7 @@ public class State {
     
     @JsonIgnore
     @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<City> city;
+    private Set<City> city = new HashSet<>();
 
     public State() {
     }

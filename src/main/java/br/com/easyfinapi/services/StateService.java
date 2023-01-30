@@ -15,7 +15,7 @@ public class StateService {
     StateRepository stateRepository;
 
     public State findById(Integer id){
-        State state = stateRepository.getById(id);
+        State state = stateRepository.findById(id).get();
 
         if (state == null) throw new ObjNotFoundException("Estado nao encontrado");
 

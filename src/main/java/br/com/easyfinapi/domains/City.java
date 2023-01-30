@@ -1,5 +1,6 @@
 package br.com.easyfinapi.domains;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ public class City {
     private String name;
     
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Address> address;
+    private Set<Address> address = new HashSet<>();
     
     @ManyToOne(fetch = FetchType.EAGER,  cascade=CascadeType.ALL)
     @JoinColumn(name="id_state")
@@ -59,8 +60,9 @@ public class City {
     public void setState(State state) {
         this.state = state;
     }
-
-    
-    
+    @Override
+    public String toString() {
+        return "City [id=" + id + ", name=" + name + ", address=" + address + ", state=" + state + "]";
+    }
 
 }

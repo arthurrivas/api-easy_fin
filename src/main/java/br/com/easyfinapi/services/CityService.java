@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.easyfinapi.domains.City;
 import br.com.easyfinapi.domains.State;
+import br.com.easyfinapi.dtos.CityDTO;
 import br.com.easyfinapi.repositorys.CityRepository;
 import br.com.easyfinapi.services.exceptions.ObjectNotFoundException;
 
@@ -22,6 +23,14 @@ public class CityService {
 
         return city;
 
+    }
+
+    public void save(City city){
+        cityRepository.save(city);
+    }
+
+    public City fromDTO(CityDTO objDTO, State state) {
+        return new City(objDTO.getId(), objDTO.getName(), state);
     }
 
 }
