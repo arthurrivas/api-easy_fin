@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class City {
     
@@ -21,7 +23,8 @@ public class City {
     private Integer id;
     private String name;
     
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Address> address = new HashSet<>();
     
     @ManyToOne(fetch = FetchType.EAGER,  cascade=CascadeType.ALL)
