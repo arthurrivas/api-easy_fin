@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class State {
     
@@ -19,6 +21,7 @@ public class State {
     private String name;
     private String acronym;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<City> city;
 
