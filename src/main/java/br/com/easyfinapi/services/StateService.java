@@ -20,4 +20,8 @@ public class StateService {
 
         return state;
     }
+
+    public void save(State state){
+        stateRepository.save(state);
+    }
 }

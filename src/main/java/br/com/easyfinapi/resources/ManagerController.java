@@ -43,21 +43,17 @@ public class ManagerController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> findManagerByid(@PathVariable(name = "id") Integer id) {
 
-		try {
-			Manager manager = managerService.findById(id);
+		Manager manager = managerService.findById(id);
 
-			return new ResponseEntity(HttpStatus.OK).ok(manager);
+		return new ResponseEntity(HttpStatus.OK).ok(manager);
 
-		} catch (Exception e) {
-			return ResponseEntity.noContent().build();
-		}
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> updateManager(@PathVariable(name = "id") Integer id, @RequestBody NewUserDTO managerDTO) {
 		try {
 			UsuarioSS ss = userService.isAuthenticated();
-			if (ss.getId() == id || ss.getAuthorities().contains(Perfil.ROLE_ADMIN) ) {
+			if (ss.getId() == id || ss.getAuthorities().contains(Perfil.ROLE_ADMIN)) {
 
 				Manager manager = managerService.fromDTO(managerDTO);
 				manager.setId(id);
@@ -66,7 +62,7 @@ public class ManagerController {
 
 				return new ResponseEntity(HttpStatus.OK).ok(manager);
 			}
-			
+
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
 		} catch (Exception e) {
