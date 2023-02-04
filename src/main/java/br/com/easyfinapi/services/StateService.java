@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import br.com.easyfinapi.domains.State;
 import br.com.easyfinapi.dtos.StateDTO;
 import br.com.easyfinapi.repositorys.StateRepository;
-import br.com.easyfinapi.services.exceptions.ObjNotFoundException;
+import br.com.easyfinapi.services.exceptions.UserNotFoundException;
 
 @Service
 public class StateService {
@@ -17,7 +17,7 @@ public class StateService {
     public State findById(Integer id){
         State state = stateRepository.findById(id).get();
 
-        if (state == null) throw new ObjNotFoundException("Estado nao encontrado");
+        if (state == null) throw new UserNotFoundException("Estado nao encontrado");
 
         return state;
     }
