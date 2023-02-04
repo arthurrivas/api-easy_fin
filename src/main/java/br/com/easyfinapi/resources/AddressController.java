@@ -15,6 +15,7 @@ import br.com.easyfinapi.domains.State;
 import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.dtos.AddressDTO;
 import br.com.easyfinapi.security.UsuarioSS;
+import br.com.easyfinapi.services.AddressService;
 import br.com.easyfinapi.services.CityService;
 import br.com.easyfinapi.services.StateService;
 import br.com.easyfinapi.services.UserServices;
@@ -27,8 +28,9 @@ public class AddressController {
     UserServices userService;
     @Autowired
     CityService cityService;
+
     @Autowired
-    StateService stateService;
+    AddressService addressService;
 
     @PostMapping("/user/{id}")
     public ResponseEntity<?> createAddress(@PathVariable(name = "id") Integer id, @RequestBody AddressDTO addressDTO){
@@ -36,7 +38,11 @@ public class AddressController {
         User user = userService.findById(id);
         City city = cityService.findById(addressDTO.getIdCity());
 
-        Address address = new Address(addressDTO.getId(), addressDTO.getNumber(), city, user);
+        Address address = new Address(addressDTO.getId(), addressDTO.getNumber(), city);
+
+        user.setAddress(address);
+
+        userService.save(user);
         
         return ResponseEntity.ok(address);
     }
