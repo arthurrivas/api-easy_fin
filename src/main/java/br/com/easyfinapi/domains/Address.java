@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Address {
 
@@ -22,6 +24,7 @@ public class Address {
     @JoinColumn(name="id_city")
     private City city;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "address")
     private User user;
 
@@ -33,6 +36,12 @@ public class Address {
         this.number = number;
         this.city = city;
         this.user = user;
+    }
+    
+    public Address(Integer id, Integer number, City city) {
+        this.id = id;
+        this.number = number;
+        this.city = city;
     }
     public Integer getId() {
         return id;
