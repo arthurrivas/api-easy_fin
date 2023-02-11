@@ -12,6 +12,8 @@ import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.security.UsuarioSS;
 import br.com.easyfinapi.services.UserServices;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "user")
 public class UserController {
@@ -19,13 +21,21 @@ public class UserController {
 	@Autowired
 	UserServices userService;
 
+	@GetMapping
+	public ResponseEntity<?> getUsers() {
+
+		List<User> users = userService.getUsers();
+
+		return new ResponseEntity(users, HttpStatus.OK);
+	}
+
 	@GetMapping(value = "/current")
 	public ResponseEntity<?> getCurrentUser() {
-		
+
 		UsuarioSS ss = userService.isAuthenticated();
-		
+
 		User user = userService.findById(ss.getId());
-		
+
 		return ResponseEntity.ok(user);
 
 	}
