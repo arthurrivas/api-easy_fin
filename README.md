@@ -1,4 +1,4 @@
-# api-easy_fyn
+# api-easy_fin
 <!-- 
 Essa API faz parte de um projeto em andamento que visa ajudar alunos do ensino médio a entender melhor conceitos matematicos e economicos.
 
