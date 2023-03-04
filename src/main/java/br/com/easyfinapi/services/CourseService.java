@@ -1,10 +1,10 @@
 package br.com.easyfinapi.services;
 
+import br.com.easyfinapi.domains.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.easyfinapi.domains.Course;
-import br.com.easyfinapi.domains.Manager;
 import br.com.easyfinapi.dtos.CourseDTO;
 import br.com.easyfinapi.repositorys.CourseRepository;
 import br.com.easyfinapi.services.exceptions.ObjectNotFoundException;
@@ -29,7 +29,7 @@ public class CourseService {
 		return course;
 	}
 	
-	public Course fromDTO(CourseDTO courseDTO, Manager manager) {
+	public Course fromDTO(CourseDTO courseDTO, User manager) {
 		return new Course(null, courseDTO.getTitle(), courseDTO.getDescription(), manager);
 	}
 	

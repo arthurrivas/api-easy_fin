@@ -3,15 +3,7 @@ package br.com.easyfinapi.domains;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,12 +23,22 @@ public class Course {
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="manager_id")
-    private Manager manager;
+    private User manager;
+
+	@ManyToMany
+	@JoinTable(
+			name="students_course",
+			joinColumns=
+				{@JoinColumn(name="course_id")},
+			inverseJoinColumns=
+				{@JoinColumn(name="user_id")}
+	)
+	private List<User> students = new ArrayList<>();
 	
 	public Course() {
 	}
 	
-	public Course(Integer id, String title, String description, Manager manager) {
+	public Course(Integer id, String title, String description, User manager) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -68,11 +70,11 @@ public class Course {
 		this.description = description;
 	}
 
-	public Manager getManager() {
+	public User getManager() {
 		return manager;
 	}
 
-	public void setManager(Manager manager) {
+	public void setManager(User manager) {
 		this.manager = manager;
 	}
 	

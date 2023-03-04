@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.easyfinapi.domains.Course;
 import br.com.easyfinapi.domains.Lesson;
-import br.com.easyfinapi.domains.Manager;
 import br.com.easyfinapi.dtos.CourseDTO;
 import br.com.easyfinapi.dtos.LessonDTO;
 import br.com.easyfinapi.security.UsuarioSS;
@@ -29,8 +28,6 @@ public class CourseController {
 
 	@Autowired
 	CourseService courseService;
-	@Autowired
-	ManagerService managerService;
 	@Autowired
 	UserServices userService;
 	@Autowired
@@ -48,23 +45,14 @@ public class CourseController {
 	@GetMapping(value = "/manager/{id}")
 	public ResponseEntity<?> getCourseByManagerId(@PathVariable(name = "id") Integer id) {
 
-		List<Course> course = managerService.findById(id).getCourses();
-
-		return new ResponseEntity(HttpStatus.OK).ok(course);
+		return null;
 
 	}
 
 	@PostMapping()
 	public ResponseEntity<?> createCourse(@RequestBody CourseDTO courseDTO) {
 		
-		UsuarioSS ss = userService.isAuthenticated();
-		
-		Manager manager = managerService.findById(ss.getId());
-
-		Course course = courseService.fromDTO(courseDTO, manager);
-		courseService.save(course);
-
-		return new ResponseEntity(HttpStatus.OK).ok(course);
+		return null;
 
 	}
 	

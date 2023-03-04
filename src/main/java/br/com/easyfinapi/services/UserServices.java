@@ -3,8 +3,11 @@ package br.com.easyfinapi.services;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.easyfinapi.domains.enums.Perfil;
+import br.com.easyfinapi.dtos.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.easyfinapi.domains.User;
@@ -17,6 +20,9 @@ public class UserServices {
 	
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	BCryptPasswordEncoder pe;
 
 	public UsuarioSS isAuthenticated() {
 		
@@ -43,4 +49,13 @@ public class UserServices {
     public List<User> getUsers() {
 		return userRepository.findAll();
     }
+
+	public void deleteById(Integer id){
+		userRepository.deleteById(id);
+	}
+
+	public User fromDTO(UserDTO userDTO){
+		return new User(userDTO.getId(),userDTO.getName(), userDTO.getEmail(), userDTO.getPhone(), pe.encode(userDTO.getPassword()), Perfil.toEnum(userDTO.getCodProfile()));
+	}
+
 }

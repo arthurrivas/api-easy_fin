@@ -1,12 +1,10 @@
 package br.com.easyfinapi.resources;
 
+import br.com.easyfinapi.dtos.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.security.UsuarioSS;
@@ -48,6 +46,35 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 
 	}
+
+	@PostMapping()
+	public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO){
+
+		User user = userService.fromDTO(userDTO);
+
+		userService.save(user);
+
+		return new ResponseEntity(user, HttpStatus.CREATED);
+	}
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<?> updateUser(@PathVariable(name = "id") Integer id, @RequestBody UserDTO userDTO){
+
+		User user = userService.fromDTO(userDTO);
+
+		userService.save(user);
+
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<?> deleteUser(@PathVariable(name = "id") Integer id){
+
+		userService.deleteById(id);
+
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
 
 
 }
