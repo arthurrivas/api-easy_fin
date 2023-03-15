@@ -1,6 +1,11 @@
 package br.com.easyfinapi.resources;
 
+import br.com.easyfinapi.domains.Address;
+import br.com.easyfinapi.domains.City;
+import br.com.easyfinapi.domains.enums.Perfil;
 import br.com.easyfinapi.dtos.UserDTO;
+import br.com.easyfinapi.services.AddressService;
+import br.com.easyfinapi.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +24,21 @@ public class UserController {
 	@Autowired
 	UserServices userService;
 
+	@Autowired
+	AddressService addressService;
+	@Autowired
+	CityService cityService;
+
 	@GetMapping
-	public ResponseEntity<?> getUsers() {
+	public ResponseEntity<List<User>> getUsers() {
 
 		List<User> users = userService.getUsers();
 
-		return new ResponseEntity(users, HttpStatus.OK);
+		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/current")
-	public ResponseEntity<?> getCurrentUser() {
+	public ResponseEntity<User> getCurrentUser() {
 
 		UsuarioSS ss = userService.isAuthenticated();
 
@@ -39,7 +49,7 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> getUserById(@PathVariable(name = "id") Integer id) {
+	public ResponseEntity<User> getUserById(@PathVariable(name = "id") Integer id) {
 
 		User user = userService.findById(id);
 
@@ -47,18 +57,35 @@ public class UserController {
 
 	}
 
-	@PostMapping()
-	public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO){
+	@PostMapping(value = "/student")
+	public ResponseEntity<User> createStudent(@RequestBody UserDTO userDTO){
 
 		User user = userService.fromDTO(userDTO);
 
 		userService.save(user);
 
-		return new ResponseEntity(user, HttpStatus.CREATED);
+		return new ResponseEntity<>(user, HttpStatus.CREATED);
+	}
+
+	@PostMapping(value = "/manager")
+	public ResponseEntity<User> createManager(@RequestBody UserDTO userDTO){
+
+		User user = userService.fromDTO(userDTO);
+		user.addPerfil(Perfil.ROLE_MANAGER);
+
+		City city = cityService.findById(userDTO.getAddress().getCity().getId());
+		Address address = addressService.fromDTO(userDTO.getAddress());
+		address.setCity(city);
+		addressService.save(address);
+
+		user.setAddress(address);
+		userService.save(user);
+
+		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> updateUser(@PathVariable(name = "id") Integer id, @RequestBody UserDTO userDTO){
+	public ResponseEntity<User> updateUser(@PathVariable(name = "id") Integer id, @RequestBody UserDTO userDTO){
 
 		User user = userService.fromDTO(userDTO);
 
@@ -68,7 +95,7 @@ public class UserController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable(name = "id") Integer id){
+	public ResponseEntity<Void> deleteUser(@PathVariable(name = "id") Integer id){
 
 		userService.deleteById(id);
 

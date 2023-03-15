@@ -6,19 +6,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,6 +24,7 @@ public class User {
 	private String name;
 	
 	@Column(unique = true)
+	@NotBlank(message = "Email obrigatorio")
 	private String email;
 	private String phone;
 	private Date birthday;
@@ -53,24 +44,13 @@ public class User {
 	public User() {
 	}	
 
-	public User(Integer id, String name, String email,String phone, String password, Perfil perfil) {
+	public User(Integer id, String name, String email,String phone, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
-		addPerfil(perfil);
 	}
-	public User(Integer id, String name, String email,String phone, String password, Address address, Perfil perfil) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.password = password;
-		this.address = address;
-		addPerfil(perfil);
-	}
-	
 
 	public Integer getId() {
 		return id;

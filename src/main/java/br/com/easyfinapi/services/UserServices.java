@@ -15,6 +15,8 @@ import br.com.easyfinapi.repositorys.UserRepository;
 import br.com.easyfinapi.security.UsuarioSS;
 import br.com.easyfinapi.services.exceptions.UserNotFoundException;
 
+import javax.validation.Valid;
+
 @Service
 public class UserServices {	
 	
@@ -42,7 +44,7 @@ public class UserServices {
 		return opt.get();
 	}
 	
-	public void save(User user){
+	public void save(@Valid User user){
 		userRepository.save(user);
 	}
 
@@ -55,7 +57,7 @@ public class UserServices {
 	}
 
 	public User fromDTO(UserDTO userDTO){
-		return new User(userDTO.getId(),userDTO.getName(), userDTO.getEmail(), userDTO.getPhone(), pe.encode(userDTO.getPassword()), Perfil.toEnum(userDTO.getCodProfile()));
+		return new User(userDTO.getId(),userDTO.getName(), userDTO.getEmail(), userDTO.getPhone(), pe.encode(userDTO.getPassword()));
 	}
 
 }
