@@ -32,12 +32,12 @@ public class AddressController {
     public ResponseEntity<?> createAddress(@PathVariable(name = "id") Integer id, @RequestBody AddressDTO addressDTO){
         
         User user = userService.findById(id);
-        City city = cityService.findById(addressDTO.getIdCity());
+        City city = cityService.findById(addressDTO.getCity().getId());
 
-        Address address = new Address(addressDTO.getId(), addressDTO.getNumber(), city);
+        Address address = new Address(addressDTO.getId(), addressDTO.getNumber());
+        address.setCity(city);
 
         user.setAddress(address);
-
         userService.save(user);
         
         return ResponseEntity.ok(address);

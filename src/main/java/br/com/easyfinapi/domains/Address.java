@@ -31,17 +31,9 @@ public class Address {
     public Address() {
     }
     
-    public Address(Integer id, Integer number, City city, User user) {
+    public Address(Integer id, Integer number) {
         this.id = id;
         this.number = number;
-        this.city = city;
-        this.user = user;
-    }
-    
-    public Address(Integer id, Integer number, City city) {
-        this.id = id;
-        this.number = number;
-        this.city = city;
     }
     public Integer getId() {
         return id;

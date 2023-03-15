@@ -4,17 +4,15 @@ public class AddressDTO {
     
     private Integer id;
     private Integer number;
-    private Integer idCity;
-    private Integer idState;
+    private CityDTO city;
 
     public AddressDTO() {
     }
 
-    public AddressDTO(Integer id, Integer number, Integer idCity, Integer idState) {
+    public AddressDTO(Integer id, Integer number, CityDTO city) {
         this.id = id;
         this.number = number;
-        this.idCity = idCity;
-        this.idState = idState;
+        this.city = city;
     }
 
     public Integer getId() {
@@ -33,22 +31,12 @@ public class AddressDTO {
         this.number = number;
     }
 
-    public Integer getIdCity() {
-        return idCity;
+    public CityDTO getCity() {
+        return city;
     }
 
-    public void setIdCity(Integer idCity) {
-        this.idCity = idCity;
+    public void setCity(CityDTO city) {
+        this.city = city;
     }
 
-    public Integer getIdState() {
-        return idState;
-    }
-
-    public void setIdState(Integer idState) {
-        this.idState = idState;
-    }
-
-    
-        
 }
