@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.easyfinapi.domains.enums.Perfil;
 
 @Entity(name = "USERS")
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
 	@Id
@@ -52,6 +52,10 @@ public class User {
 		this.password = password;
 	}
 
+	public boolean isAdmin(){
+		return this.getPerfis().contains(Perfil.ROLE_ADMIN);
+	};
+
 	public Integer getId() {
 		return id;
 	}
@@ -84,14 +88,19 @@ public class User {
 		this.password = senha;
 	}
 
-	public Set<Perfil> getPerfis() {
+	public Set<Integer> getPerfis() {
+		return perfis;
+	}
+
+	public Set<Perfil> getPerfisDescription() {
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
 	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCodPerfil());
 	}
-	
+
+
 	public Address getAddress() {
 		return address;
 	}

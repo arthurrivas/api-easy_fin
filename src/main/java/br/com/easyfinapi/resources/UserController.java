@@ -6,6 +6,8 @@ import br.com.easyfinapi.domains.enums.Perfil;
 import br.com.easyfinapi.dtos.UserDTO;
 import br.com.easyfinapi.services.AddressService;
 import br.com.easyfinapi.services.CityService;
+import br.com.easyfinapi.services.exceptions.DataIntegretyException;
+import br.com.easyfinapi.services.exceptions.ForbiddenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import br.com.easyfinapi.domains.User;
 import br.com.easyfinapi.security.UsuarioSS;
 import br.com.easyfinapi.services.UserServices;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -57,31 +60,44 @@ public class UserController {
 
 	}
 
-	@PostMapping(value = "/student")
-	public ResponseEntity<User> createStudent(@RequestBody UserDTO userDTO){
+	@PostMapping()
+	public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO){
 
-		User user = userService.fromDTO(userDTO);
+		UsuarioSS ss = userService.isAuthenticated();
+		User currentUser = userService.findById(ss.getId());
 
-		userService.save(user);
+		Perfil profile = null;
 
-		return new ResponseEntity<>(user, HttpStatus.CREATED);
-	}
+		switch (userDTO.getCodProfile()){
+			case 1: // ADMIN
+				
+				if (!currentUser.isAdmin()) throw new ForbiddenException("Apenas admin pode criar novos admins");
+				
+				profile = Perfil.ROLE_ADMIN;
+				break;
+			case 2: // MANAGER
+				profile = Perfil.ROLE_MANAGER;
+				break;
+			case 3: // STUDENT
+				profile = Perfil.ROLE_STUDENT;
+				break;
 
-	@PostMapping(value = "/manager")
-	public ResponseEntity<User> createManager(@RequestBody UserDTO userDTO){
+			default:
+				throw new DataIntegretyException("Codigo perfil invalido");
+		}
 
-		User user = userService.fromDTO(userDTO);
-		user.addPerfil(Perfil.ROLE_MANAGER);
+		User newUser = userService.fromDTO(userDTO);
+		newUser.addPerfil(profile);
 
 		City city = cityService.findById(userDTO.getAddress().getCity().getId());
 		Address address = addressService.fromDTO(userDTO.getAddress());
 		address.setCity(city);
 		addressService.save(address);
 
-		user.setAddress(address);
-		userService.save(user);
+		newUser.setAddress(address);
+		userService.save(newUser);
 
-		return new ResponseEntity<>(user, HttpStatus.CREATED);
+		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/{id}")
