@@ -38,7 +38,7 @@ public class CityController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getCities(@RequestParam(name = "name") String name,
+    public ResponseEntity<Page<City>> getCities(@RequestParam(name = "name") String name,
                                        @RequestParam(value= "page", defaultValue="0") Integer page,
                                        @RequestParam(value="linesPerPage", defaultValue="30") Integer linesPerPage,
                                        @RequestParam(value="orderBy", defaultValue="name") String orderBy,
