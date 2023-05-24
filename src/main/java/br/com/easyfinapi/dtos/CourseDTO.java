@@ -2,17 +2,26 @@ package br.com.easyfinapi.dtos;
 
 
 public class CourseDTO {
-	
+
+	private Integer id;
 	private String title;
 	private String description;
 	
 	public CourseDTO() {
 	}
-	
-	public CourseDTO(String title, String description) {
-		super();
+
+	public CourseDTO(Integer id, String title, String description) {
+		this.id = id;
 		this.title = title;
 		this.description = description;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitle() {

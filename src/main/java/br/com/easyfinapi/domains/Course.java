@@ -38,12 +38,11 @@ public class Course {
 	public Course() {
 	}
 	
-	public Course(Integer id, String title, String description, User manager) {
+	public Course(Integer id, String title, String description) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.manager = manager;
 	}
 
 	public Integer getId() {
