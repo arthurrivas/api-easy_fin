@@ -103,8 +103,9 @@ public class UserDTO {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
+                ", birthday=" + birthday +
                 ", codProfile=" + codProfile +
-                ", addressDTO=" + address +
+                ", address=" + address +
                 '}';
     }
 }
